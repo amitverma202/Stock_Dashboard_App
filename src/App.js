@@ -1,21 +1,41 @@
 import React, { useState } from "react";
-import ThemeIcon from "./components/ThemeIcon";
-import "./App.css";
+import { BrowserRouter as Router, Route, Routes} from "react-router-dom";
+import Dashboard from "./components/Dashboard";
+import Auth from "./components/Auth";
+import StockContext from "./context/StockContext";
+import ThemeContext from "./context/ThemeContext";
 
-const App = () => {
-  const [isDarkMode, setDarkMode] = useState(false);
+function App() {
+  const [darkMode, setDarkMode] = useState(false);
+  const [stockSymbol, setStockSymbol] = useState("MSFT");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const toggleMode = () => {
-    setDarkMode(!isDarkMode);
-    document.body.classList.toggle("dark-mode", isDarkMode);
-    document.body.classList.toggle("light-mode", !isDarkMode);
+  const handleLogin = () => {
+    setIsLoggedIn(true);
   };
-
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+  };
   return (
-    <div className="app-container">
-      <ThemeIcon onToggle={toggleMode} isDarkMode={isDarkMode} />
-    </div>
+    <ThemeContext.Provider value={{ darkMode, setDarkMode }}>
+      <StockContext.Provider value={{ stockSymbol, setStockSymbol }}>
+        <Router>
+         <Routes>
+            <Route
+              path="/"
+              element={<Auth onLogin={handleLogin} />}
+            />
+            {isLoggedIn && (
+              <Route
+                path="/dashboard"
+                element={<Dashboard onLogout={handleLogout} />}
+              />
+            )}
+          </Routes>
+        </Router>
+      </StockContext.Provider>
+    </ThemeContext.Provider>
   );
-};
+}
 
 export default App;

@@ -1,13 +1,28 @@
-import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAdjust } from '@fortawesome/free-solid-svg-icons';
-import "C:/Users/Sahil Verma/OneDrive/Desktop/Amit React Code/stock-dashboard-app/src/App.css";
+import React, { useContext } from "react";
+import ThemeContext from "../context/ThemeContext";
+import { MoonIcon } from "@heroicons/react/solid";
 
-const ThemeIcon = ({ onToggle, isDarkMode }) => {
+const ThemeIcon = () => {
+  const { darkMode, setDarkMode } = useContext(ThemeContext);
+
+  const toggleDarkMode = () => {
+    setDarkMode(!darkMode);
+  };
+
   return (
-    <button className="theme-icon" onClick={onToggle}>
-      <FontAwesomeIcon className="icon-change" icon={faAdjust} />
-     
+    <button
+      onClick={toggleDarkMode}
+      className={`rounded-lg border-1 border-neutral-400 p-2 absolute right-8 xl:right-32 shadow-lg transition duration-300 hover:scale-125 ${
+        darkMode ? "shadow-gray-900" : null
+      }`}
+    >
+      <MoonIcon
+        className={`h-8 w-8 cursor-pointer stroke-1 ${
+          darkMode
+            ? "fill-yellow-400 stroke-yellow-400"
+            : "fill-none stroke-neutral-400"
+        }`}
+      />
     </button>
   );
 };

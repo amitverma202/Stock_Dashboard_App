@@ -1,8 +1,11 @@
-import { render, screen } from '@testing-library/react';
+// Import necessary dependencies
+import React from 'react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import App from './App';
 
-test('renders learn react link', () => {
+test('logs in successfully and renders the dashboard', () => {
   render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+  const loginButton = screen.getByRole('button', { name: /Login/i });
+  fireEvent.click(loginButton);
+  expect(screen.getByText('Stock Market Dashboard')).toBeInTheDocument();
 });
