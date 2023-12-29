@@ -40,7 +40,7 @@ Before running the application, ensure you have the following:
 GETTING STARTED
 
 1. Clone the repository:
-    git clone "https Link"
+    git clone "https://github.com/amitverma202/Stock_Dashboard_App.git"
 
 2. Install dependencies:
 
