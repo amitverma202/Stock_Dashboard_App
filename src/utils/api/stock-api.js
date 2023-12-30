@@ -1,5 +1,5 @@
 const basePath = "https://cloud.iexapis.com/stable";
-const apiKey = "pk_ae81ce6b66064d9d90a964d771dcb026";
+const apiKey = ""; // Replace with your own IEX cloud key
 
 /**
  * Searches best stock matches based on a user's query
